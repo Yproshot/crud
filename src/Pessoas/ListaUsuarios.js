@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { FlatList, StyleSheet, View } from "react-native"
 import { Button, Card, Text } from 'react-native-paper'
 
-export default function ListaPessoas({ navigation, route }) {
+export default function ListaUsuarios({ navigation, route }) {
 
   const [pessoas, setPessoas] = React.useState([])
 
@@ -50,7 +50,7 @@ export default function ListaPessoas({ navigation, route }) {
     <View>
 
       <View>
-        <Button mode='contained' onPress={() => { navigation.navigate('FormPessoas', { acao: adicionar }) }}>Cadastrar</Button>
+        <Button mode='contained' onPress={() => { navigation.navigate('CadastroUsuarios', { acao: adicionar }) }}>Cadastrar</Button>
       </View>
 
       <FlatList
@@ -61,11 +61,11 @@ export default function ListaPessoas({ navigation, route }) {
             <Card.Content>
               <Text variant="titleLarge">Nome: {item.nome}</Text>
               <Text variant="titleLarge">CPF: {item.cpf}</Text>
-              <Text variant="titleLarge">Idade: {item.idade}</Text>
               <Text variant="titleLarge">E-mail: {item.email}</Text>
+              <Text variant="titleLarge">Senha: {item.senha}</Text>
             </Card.Content>
             <Card.Actions>
-              <Button onPress={() => { navigation.navigate('FormPessoas', { acao: editar, pessoaAntiga: item }) }}>Editar</Button>
+              <Button onPress={() => { navigation.navigate('CadastroUsuarios', { acao: editar, pessoaAntiga: item }) }}>Editar</Button>
               <Button onPress={() => excluir(item)}>Excluir</Button>
             </Card.Actions>
           </Card>

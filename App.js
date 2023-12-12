@@ -1,8 +1,8 @@
-import StackPessoas from "./src/Pessoas/StackPessoas";
+import StackUsuarios from "./src/Pessoas/StackUsuarios";
 
 
 export default function App() {
   return (
-    <StackPessoas />
+    <StackUsuarios/>
   );
 }

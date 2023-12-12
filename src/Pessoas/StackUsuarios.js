@@ -1,19 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import ListaUsuarios from './ListaUsuarios';
+import CadastroUsuarios from './CadastroUsuarios';
 
-import FormPessoas from './FormPessoas';
-import ListaPessoas from './ListaPessoas';
 
 const Stack = createStackNavigator();
 
 
-export default function StackPessoas() {
+export default function StackUsuarios() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
 
-                <Stack.Screen name="ListaPessoas" component={ListaPessoas} />
-                <Stack.Screen name="FormPessoas" component={FormPessoas} />
+                <Stack.Screen name="ListaUsuarios" component={ListaUsuarios} />
+                <Stack.Screen name="CadastroUsuarios" component={CadastroUsuarios} />
 
             </Stack.Navigator>
         </NavigationContainer>

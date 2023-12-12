@@ -5,15 +5,15 @@ import { TextInputMask } from 'react-native-masked-text';
 import { Button, TextInput, Text} from 'react-native-paper';
 import * as yup from 'yup';
 
-export default function FormPessoas({ navigation, route }) {
+export default function CadastroUsuarios({ navigation, route }) {
 
   const acao = route.params.acao
   const pessoaAntiga = route.params.pessoaAntiga
   const validationSchema = yup.object().shape({
     nome: yup.string().min(5, 'Nome curto').max(50, 'Nome grande').required('Campo obrigatório'),
     cpf: yup.string().min(14, 'cpf inválido').max(14, 'cpf inválido').required('Campo obrigatório'),
-    idade: yup.number().integer('numero inteiro').positive('numero positivo').required('Campo obrigatório'),
-    email: yup.string().email('email inválido').required('Campo obrigatório')
+    email: yup.string().email('email inválido').required('Campo obrigatório'),
+    senha: yup.string().min(6, 'Senha curta').max(12, 'Senha grande').required('Campo obrigatório')
   })
 
   function salvar(pessoa) {
@@ -35,8 +35,8 @@ export default function FormPessoas({ navigation, route }) {
         initialValues={{
           nome: pessoaAntiga ? pessoaAntiga.nome : '',
           cpf: pessoaAntiga ? pessoaAntiga.cpf : '',
-          idade: pessoaAntiga ? pessoaAntiga.idade : '',
           email: pessoaAntiga ? pessoaAntiga.email : '',
+          senha: pessoaAntiga ? pessoaAntiga.senha : '',
         }}
         validationSchema={validationSchema}
         onSubmit={values => salvar(values)}
@@ -76,29 +76,39 @@ export default function FormPessoas({ navigation, route }) {
               }
             />
               {(errors.cpf && touched.cpf) && <Text style={{ textAlign: "center"}}>{errors.cpf}</Text>}
+              
+              <TextInput
+                style={styles.input}
+                mode='outlined'
+                label='Email'
+                value={values.email}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                error={errors.email && touched.email}
+              />
+              {(errors.email && touched.email) && <Text style={{ textAlign: "center"}}>{errors.email}</Text>}
 
             <TextInput
               style={styles.input}
               mode='outlined'
-              label='Idade'
-              value={values.idade}
-              onChangeText={handleChange('idade')}
-              onBlur={handleBlur('idade')}
-              error={errors.idade && touched.idade}
-              keyboardType={'numeric'}
+              label='Senha'
+              value={values.senha}
+              onChangeText={handleChange('senha')}
+              onBlur={handleBlur('senha')}
+              error={errors.senha && touched.senha}
+              render={props =>
+                <TextInputMask
+                {...props}
+                type={'custom'}
+                options={{
+                  mask: '********************************', // Máscara para esconder a senha
+                }}
+                secureTextEntry
+              />
+              }
             />
-              {(errors.idade && touched.idade) && <Text style={{ textAlign: "center"}}>{errors.idade}</Text>}
+              {(errors.senha && touched.senha) && <Text style={{ textAlign: "center"}}>{errors.senha}</Text>}
 
-            <TextInput
-              style={styles.input}
-              mode='outlined'
-              label='Email'
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              error={errors.email && touched.email}
-            />
-            {(errors.email && touched.email) && <Text style={{ textAlign: "center"}}>{errors.email}</Text>}
 
 
             <Button mode='contained' onPress={handleSubmit} >Cadastrar</Button>
